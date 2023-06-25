@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,18 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        return $request;
+        // Get and store the uploaded file from the request
+        $image = $request->file('image')->store('uploads/categories', 'public');
+
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image,
+        ]);
+
+        return to_route('admin.categories.index');
     }
 
     /**
@@ -44,9 +54,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact($category));
     }
 
     /**
@@ -62,6 +72,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::destroy($id);
+        return redirect()->back();
     }
 }
