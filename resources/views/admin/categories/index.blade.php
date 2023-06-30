@@ -58,7 +58,7 @@
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit">Delete</button>
+                                            <button onsubmit="confirm('delete')" type="submit">Delete</button>
                                         </form>
                                     </div>
                                 </td>
