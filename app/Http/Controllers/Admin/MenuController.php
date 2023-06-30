@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MenuStoreRequest;
+use App\Models\Category;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -12,7 +15,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('admin.menus.index');
+        $menus = Menu::all();
+        return view('admin.menus.index', ['menus' => $menus]);
     }
 
     /**
@@ -20,15 +24,29 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.menus.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuStoreRequest $request)
     {
-        //
+        // store image
+        $imagePath = $request->file('image')->store('uploads/menus/images', 'public');
+        // store record
+        $menu = Menu::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $imagePath,
+            'price' => $request->price,
+        ]);
+        // attach
+        if ($request->has('categories')) {
+            $menu->categories()->attach($request->categories);
+        }
+        return to_route('admin.menus.index');
     }
 
     /**
@@ -42,9 +60,10 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Menu $menu)
     {
-        //
+        $categories = Category::all();
+        return view('admin.menus.edit', compact('menu', 'categories'));
     }
 
     /**
