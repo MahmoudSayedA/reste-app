@@ -35,7 +35,7 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         // Get and store the uploaded file from the request
-        $imagePath = $request->file('image')->store('uploads/categories', 'public');
+        $imagePath = $request->file('image')->store('uploads/categories/images', 'public');
 
         Category::create([
             'name' => $request->name,
@@ -71,10 +71,11 @@ class CategoryController extends Controller
         $image = $category->image;
         // check if new image added
         if ($request->hasFile('image')) {
+            $imagePath = public_path('storage/' . $category->image);
             //delete the old
-            File::delete($image);
+            File::delete($imagePath);
             //save the new
-            $image = $request->file('image')->store('uploads/categories', 'public');
+            $image = $request->file('image')->store('uploads/categories/images', 'public');
         }
         $category->update([
             'name' => $request->name,
@@ -87,12 +88,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-
-        // Retrieve the category with the specified ID
-        $category = Category::findOrFail($id);
-
         // Get the absolute path to the image file
         $imagePath = public_path('storage/' . $category->image);
 
