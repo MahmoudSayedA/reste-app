@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->dateTime('reservation_date');
-            $table->unsignedBigInteger('table_id');
+            $table->foreignId('table_id')->constrained('tables', 'id', 'FK_reservations_tables')->onDelete('cascade');
             $table->integer('guest_num');
             $table->timestamps();
         });
