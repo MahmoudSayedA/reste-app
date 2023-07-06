@@ -29,7 +29,7 @@
                         <div class="sm:col-span-6">
                             <label for="last_name" class="block text-sm font-medium text-gray-700"> Last Name </label>
                             <div class="mt-1">
-                                <input value="{{old('last_name')}}"  type="text" id="last_name" name="last_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('last_name') border-red-400 @enderror" />
+                                <input value="{{old('last_name')}}" type="text" id="last_name" name="last_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('last_name') border-red-400 @enderror" />
                             </div>
                             @error('last_name')
                             <div class="text-sm text-red-400">{{ $message }}</div>
@@ -39,7 +39,7 @@
                         <div class="sm:col-span-6">
                             <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                             <div class="mt-1">
-                                <input value="{{old('email')}}"  type="email" id="email" name="email" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-400 @enderror" />
+                                <input value="{{old('email')}}" type="email" id="email" name="email" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-400 @enderror" />
                             </div>
                             @error('email')
                             <div class="text-sm text-red-400">{{ $message }}</div>
@@ -49,7 +49,7 @@
                         <div class="sm:col-span-6">
                             <label for="phone" class="block text-sm font-medium text-gray-700"> Phone </label>
                             <div class="mt-1">
-                                <input value="{{old('phone')}}"  type="text" id="phone" name="phone" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('phone') border-red-400 @enderror" />
+                                <input value="{{old('phone')}}" type="text" id="phone" name="phone" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('phone') border-red-400 @enderror" />
                             </div>
                             @error('phone')
                             <div class="text-sm text-red-400">{{ $message }}</div>
@@ -59,7 +59,7 @@
                         <div class="sm:col-span-6">
                             <label for="guest_num" class="block text-sm font-medium text-gray-700"> Guest Number </label>
                             <div class="mt-1">
-                                <input value="{{old('guest_num')}}"  type="number" id="guest_num" name="guest_num" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('guest_num') border-red-400 @enderror" />
+                                <input value="{{old('guest_num')}}" type="number" id="guest_num" name="guest_num" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('guest_num') border-red-400 @enderror" />
                             </div>
                             @error('guest_num')
                             <div class="text-sm text-red-400">{{ $message }}</div>
@@ -71,7 +71,7 @@
                             <div class="mt-1">
                                 <select id="table" name="table_id" class="form-multiselect block w-full mt-1">
                                     @foreach ($tables as $table)
-                                    <option value="{{ $table->id }}" @selected($table->id == old('table_id'))>{{ $table->name }}</option>
+                                    <option value="{{ $table->id }}" @selected($table->id == old('table_id'))>{{ $table->name . "  ([$table->guest_num] Guests)"}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -80,7 +80,7 @@
                         <div class="sm:col-span-6">
                             <label for="reservation_date" class="block text-sm font-medium text-gray-700"> Reservation Date </label>
                             <div class="mt-1">
-                                <input value="{{old('reservation_date')}}"  type="datetime-local" id="reservation_date" name="reservation_date" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('reservation_date') border-red-400 @enderror" />
+                                <input value="{{old('reservation_date')}}" type="datetime-local" id="reservation_date" name="reservation_date" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('reservation_date') border-red-400 @enderror" />
                             </div>
                             @error('reservation_date')
                             <div class="text-sm text-red-400">{{ $message }}</div>

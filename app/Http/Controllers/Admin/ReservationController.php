@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Reservation;
 use App\Models\Table;
-use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
@@ -36,6 +35,14 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreRequest $request)
     {
+        // Check if num of guests suitable for table capacity
+        $table = Table::findOrFail($request->input('table_id'));
+        $guests = $request->input('guest_num');
+        if ($guests > $table->guest_num) {
+            return redirect()->back()->withInput()
+                ->with('warning', "table [$table->name] can just hold $table->guest_num guest not $guests");
+        }
+
         Reservation::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -64,6 +71,14 @@ class ReservationController extends Controller
      */
     public function update(ReservationStoreRequest $request, Reservation $reservation)
     {
+        // Check if num of guests suitable for table capacity
+        $table = Table::findOrFail($request->input('table_id'));
+        $guests = $request->input('guest_num');
+        if ($guests > $table->guest_num) {
+            return redirect()->back()->withInput()
+                ->with('warning', "table [$table->name] can just hold $table->guest_num guest not $guests");
+        }
+
         $reservation->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -74,7 +89,7 @@ class ReservationController extends Controller
             'reservation_date' => $request->input('reservation_date'),
         ]);
 
-        return to_route('admin.reservations.index');
+        return to_route('admin.reservations.index')->with('success', 'reservation updated successfully');
     }
 
     /**
@@ -83,6 +98,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
-        return redirect()->back();
+        return redirect()->back()->with('danger', 'reservation deleted successfully');
     }
 }

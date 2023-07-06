@@ -70,9 +70,9 @@
                         <div class="sm:col-span-6 pt-5">
                             <label for="table" class="block text-sm font-medium text-gray-700">Table Id</label>
                             <div class="mt-1">
-                                <select id="table" name="table_id"  class="form-multiselect block w-full mt-1">
+                                <select id="table" name="table_id" class="form-multiselect block w-full mt-1">
                                     @foreach ($tables as $table)
-                                    <option value={{ $table->id }} title="id={{$table->id}}" @selected($table->id === $reservation->table->id)>{{ $table->name }}</option>
+                                    <option value={{ $table->id }} title="id={{$table->id}}" @selected($table->id === $reservation->table->id)>{{ $table->name . "  ([$table->guest_num] Guests)" }}</option>
                                     @endforeach
                                 </select>
                             </div>

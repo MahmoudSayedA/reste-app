@@ -7,7 +7,6 @@ use App\Enums\TableLocations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TableStoreRequest;
 use App\Models\Table;
-use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
@@ -43,15 +42,7 @@ class TableController extends Controller
             'location' => $request->location,
         ]);
 
-        return to_route('admin.tables.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return to_route('admin.tables.index')->with('success', 'table created successfully');
     }
 
     /**
@@ -72,7 +63,7 @@ class TableController extends Controller
     {
         $table->update($request->validated());
 
-        return to_route('admin.tables.index');
+        return to_route('admin.tables.index')->with('success', 'table updated successfully');
     }
 
     /**
@@ -81,6 +72,6 @@ class TableController extends Controller
     public function destroy(Table $table)
     {
         $table->delete();
-        return redirect()->back();
+        return redirect()->back()->with('danger', 'table deleted successfully');
     }
 }

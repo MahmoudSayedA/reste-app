@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
@@ -43,15 +41,7 @@ class CategoryController extends Controller
             'image' => $imagePath,
         ]);
 
-        return to_route('admin.categories.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return to_route('admin.categories.index')->with('success', 'category added successfully');
     }
 
     /**
@@ -82,7 +72,7 @@ class CategoryController extends Controller
             'description' => $request->description,
             'image' => $image,
         ]);
-        return to_route('admin.categories.index');
+        return to_route('admin.categories.index')->with('success', 'category updated successfully');
     }
 
     /**
@@ -100,6 +90,6 @@ class CategoryController extends Controller
         $category->delete();
 
         // Redirect back to the index page
-        return to_route('admin.categories.index');
+        return to_route('admin.categories.index')->with('danger', 'category deleted successfully');
     }
 }

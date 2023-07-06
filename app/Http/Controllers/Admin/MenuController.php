@@ -49,15 +49,7 @@ class MenuController extends Controller
         if ($request->has('categories')) {
             $menu->categories()->attach($request->categories);
         }
-        return to_route('admin.menus.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return to_route('admin.menus.index')->with('success', 'menu added successfully');
     }
 
     /**
@@ -94,7 +86,7 @@ class MenuController extends Controller
         if ($request->has('categories')) {
             $menu->categories()->sync($request->categories);
         }
-        return to_route('admin.menus.index');
+        return to_route('admin.menus.index')->with('success', 'menu updated successfully');
     }
 
     /**
@@ -105,6 +97,6 @@ class MenuController extends Controller
         $imagePath = public_path('storage/' . $menu->image);
         File::delete($imagePath);
         $menu->delete();
-        return to_route('admin.menus.index');
+        return to_route('admin.menus.index')->with('danger', 'menu deleted successfully');
     }
 }
