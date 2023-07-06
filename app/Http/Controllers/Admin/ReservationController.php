@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Reservation;
 use App\Models\Table;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Request;
 
 class ReservationController extends Controller
 {
@@ -39,10 +41,14 @@ class ReservationController extends Controller
         $table = Table::findOrFail($request->input('table_id'));
         $guests = $request->input('guest_num');
         if ($guests > $table->guest_num) {
-            return redirect()->back()->withInput()
+            return back()->withInput()
                 ->with('warning', "table [$table->name] can just hold $table->guest_num guest not $guests");
         }
-
+        // Catch the pre resevation date
+        if (!($this->checkReservationDate($request, $table))) {
+            return back()->withInput()
+                ->with('warning', "table[$table->name] is resrved at this date");
+        }
         Reservation::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -78,7 +84,11 @@ class ReservationController extends Controller
             return redirect()->back()->withInput()
                 ->with('warning', "table [$table->name] can just hold $table->guest_num guest not $guests");
         }
-
+        // Catch the pre resevation date
+        if (!($this->checkReservationDate($request, $table))) {
+            return back()->withInput()
+                ->with('warning', "table[$table->name] is resrved at this date");
+        }
         $reservation->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -99,5 +109,33 @@ class ReservationController extends Controller
     {
         $reservation->delete();
         return redirect()->back()->with('danger', 'reservation deleted successfully');
+    }
+    /**
+     * check if the reservation date is pre-reseved
+     *
+     * @param Request $request
+     * @param Table $table
+     * @return boolean
+     */
+    private function checkReservationDate($request, Table $table): bool
+    {
+        $period = 1;
+        $res_date = Carbon::parse($request->input('reservation_date'));
+        $end_res_date = $res_date->copy()->addHours($period);
+
+        foreach ($table->reservations as $res) {
+            // Catch the pre resevation date
+            $prev_date = Carbon::parse($res->reservation_date);
+            $end_prev_date = $prev_date->copy()->addHours($period);
+
+            if (
+                $res_date->format('Y-m-d') == $prev_date->format('Y-m-d') &&
+                ($res_date->between($prev_date, $end_prev_date) ||
+                    $end_res_date->between($prev_date, $end_prev_date))
+            ) {
+                return false;
+            }
+        }
+        return true;
     }
 }
