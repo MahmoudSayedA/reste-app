@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * add app work hours config
+ */
+
+require_once __DIR__ . '/../app/constants/WorkHours.php';
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

@@ -119,14 +119,14 @@ class ReservationController extends Controller
      */
     private function checkReservationDate($request, Table $table): bool
     {
-        $period = 1;
+        $period = RESERVATION_PERIOD;
         $res_date = Carbon::parse($request->input('reservation_date'));
-        $end_res_date = $res_date->copy()->addHours($period);
+        $end_res_date = $res_date->copy()->addMinutes($period);
 
         foreach ($table->reservations as $res) {
             // Catch the pre resevation date
             $prev_date = Carbon::parse($res->reservation_date);
-            $end_prev_date = $prev_date->copy()->addHours($period);
+            $end_prev_date = $prev_date->copy()->addMinutes($period);
 
             if (
                 $res_date->format('Y-m-d') == $prev_date->format('Y-m-d') &&
