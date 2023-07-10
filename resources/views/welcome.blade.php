@@ -11,7 +11,7 @@
         </div>
         <div class="flex flex-col items-center mt-12 text-center">
             <span class="relative inline-flex w-full md:w-auto">
-                <a href="#_" type="button" class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
+                <a href="{{ route('reservations.step.one') }}" type="button" class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
                     Make Reservation Now
                 </a>
         </div>
@@ -30,9 +30,10 @@
                         <h2 class="text-4xl text-green-600">Welcome</h2>
                         <!-- </h1> -->
                         <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo incidunt praesentium, ipsum
-                            culpa minus eveniet, id nesciunt excepturi sit voluptate repudiandae. Explicabo, incidunt quia.
-                            Repellendus mollitia quaerat est voluptas!
+                            Welcome to TailFood restaurant! We're a family-owned business that's been serving delicious food
+                            for over 20 years. Our chefs use fresh ingredients to prepare homemade recipes,
+                            and our staff provides friendly service. Join us for breakfast, lunch,
+                            or dinner and enjoy a warm and inviting atmosphere.Thank you for choosing us!
                         </p>
                         <div class="relative flex">
                             <a href="#_" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-green-600 rounded-md sm:mb-0 hover:bg-green-700 sm:w-auto">
@@ -101,99 +102,21 @@
         </div>
         <div class="container w-full px-5 py-6 mx-auto">
             <div class="grid lg:grid-cols-4 gap-y-6">
+                @foreach ($specials->menus as $menu)
                 <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg" alt="Image" />
+                    <img class="w-full h-48" src="{{asset('storage/'.$menu->image)}}" alt="Image" />
                     <div class="px-6 py-4">
                         <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-red-500 rounded-full text-red-50">Seafood</span>
+                            <span class="px-4 py-0.5 text-sm bg-red-500 rounded-full text-red-50">{{ $specials->name }}</span>
                         </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">salmon fish 1 seafood</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
+                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase overflow-hidden">{{ $menu->name }}</h4>
+                        <p class="leading-normal text-gray-700">{{ $menu->description }}</p>
                     </div>
                     <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$20.0</span>
+                        <span class="text-xl text-green-600">${{ $menu->price }}</span>
                     </div>
                 </div>
-                <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2010/12/13/10/25/canape-2802_960_720.jpg" alt="Image" />
-                    <div class="px-6 py-4">
-                        <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-pink-500 rounded-full text-pink-50">Seafood</span>
-                        </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">salmon fish 2 seafood</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
-                    </div>
-                    <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$40.12</span>
-                    </div>
-                </div>
-
-                <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_960_720.jpg" alt="Image" />
-                    <div class="px-6 py-4">
-                        <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-red-500 rounded-full text-red-50">Seafood</span>
-                        </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">salmon fish 3 seafood</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
-                    </div>
-                    <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$50.12</span>
-                    </div>
-                </div>
-
-                <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg" alt="Image" />
-                    <div class="px-6 py-4">
-                        <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-pink-500 rounded-full text-pink-50">Tea</span>
-                        </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">Fresh Tea</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
-                    </div>
-                    <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$4.00</span>
-                    </div>
-                </div>
-                <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_960_720.jpg" alt="Image" />
-                    <div class="px-6 py-4">
-                        <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-red-500 rounded-full text-red-50">Seafood</span>
-                        </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">salmon fish 3 seafood</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
-                    </div>
-                    <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$50.12</span>
-                    </div>
-                </div>
-
-                <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
-                    <img class="w-full h-48" src="https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg" alt="Image" />
-                    <div class="px-6 py-4">
-                        <div class="flex mb-2">
-                            <span class="px-4 py-0.5 text-sm bg-pink-500 rounded-full text-pink-50">Tea</span>
-                        </div>
-                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">Fresh Tea</h4>
-                        <p class="leading-normal text-gray-700">Lorem ipsum dolor, sit amet cons ectetur adipis icing
-                            elit.</p>
-                    </div>
-                    <div class="flex items-center justify-between p-4">
-                        <button class="px-4 py-2 bg-green-600 text-green-50">Order Now</button>
-                        <span class="text-xl text-green-600">$4.00</span>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
@@ -230,7 +153,7 @@
         <div class="my-16 text-center">
             <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
                 Testimonial </h2>
-            <p class="text-xl text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. soluta sapient</p>
+            <p class="text-xl text-white">What Our Customers Are Saying</p>
         </div>
         <div class="grid gap-2 lg:grid-cols-3">
             <div class="max-w-md p-4 bg-white rounded-lg shadow-lg">
@@ -239,9 +162,11 @@
                 </div>
                 <div>
                     <h2 class="text-3xl font-semibold text-gray-800">Food</h2>
-                    <p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt
-                        ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-                        minus consequuntur!</p>
+                    <p class="mt-2 text-gray-600">
+                        I recently visited your restaurant and I have to say that the food was
+                        amazing! Every dish that I tried was bursting with flavor and cooked to perfection.
+                        The ingredients were fresh and high-quality, and the portions were generous. I especially loved the
+                        SEAFOOD PAELLA, which was one of the best I've ever had.</p>
                 </div>
                 <div class="flex justify-end mt-4">
                     <a href="#" class="text-xl font-medium text-green-500">John Doe</a>
@@ -252,13 +177,14 @@
                     <img class="object-cover w-20 h-20 border-2 border-green-500 rounded-full" src="https://cdn.pixabay.com/photo/2018/01/04/21/15/young-3061652__340.jpg">
                 </div>
                 <div>
-                    <h2 class="text-3xl font-semibold text-gray-800">Food</h2>
-                    <p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt
-                        ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-                        minus consequuntur!</p>
+                    <h2 class="text-3xl font-semibold text-gray-800">Mneu</h2>
+                    <p class="mt-2 text-gray-600">
+                        The menu had a great variety of options to choose from,
+                        and I appreciated the vegetarian and gluten-free options.
+                        The presentation of the dishes was also beautiful and showed a lot of attention to detail.</p>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <a href="#" class="text-xl font-medium text-green-500">John Doe</a>
+                    <a href="#" class="text-xl font-medium text-green-500">Sally Korany</a>
                 </div>
             </div>
             <div class="max-w-md p-4 bg-white rounded-lg shadow-lg">
@@ -266,13 +192,15 @@
                     <img class="object-cover w-20 h-20 border-2 border-green-500 rounded-full" src="https://cdn.pixabay.com/photo/2018/01/18/17/48/purchase-3090818__340.jpg">
                 </div>
                 <div>
-                    <h2 class="text-3xl font-semibold text-gray-800">Food</h2>
-                    <p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt
-                        ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-                        minus consequuntur!</p>
+                    <h2 class="text-3xl font-semibold text-gray-800">Service</h2>
+                    <p class="mt-2 text-gray-600">
+                        In addition to the food, I was impressed by the attentive service from the staff.
+                        Our server was friendly and knowledgeable, and made great recommendations from the menu.
+                        The restaurant itself had a great atmosphere, with a cozy and welcoming feel.
+                    </p>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <a href="#" class="text-xl font-medium text-green-500">John Doe</a>
+                    <a href="#" class="text-xl font-medium text-green-500">Aleen Marcial</a>
                 </div>
             </div>
         </div>
