@@ -1,6 +1,6 @@
 # Reste-App
 
-Reste-app is a website for managing restaurant reservations, built using the Laravel framework and customized with styles from the Tailwind template. With Reste-app, restaurant admins can easily add, update, and delete categories, menu items, tables, and reservations, all from a simple and intuitive admin panel. For regular users, Reste-app makes it easy to view restaurant information, browse the menu, and make reservations with just a few clicks.
+Reste-app is a website for managing restaurant reservations, built using the Laravel framework and customized with styles from the Tailwind template. With Reste-app, restaurant admins can easily add, update, and delete categories, menu items, tables, and reservations, all from a simple and intuitive admin panel. For regular users, Reste-app makes it easy to view restaurant information, browse the menu, and make reservations with just a few clicks!.
 
 ## Features
 
