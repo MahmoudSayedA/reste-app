@@ -17,7 +17,7 @@ To install and run Reste-app on your local machine, follow these steps:
 2. In the project root directory, run composer install to install the necessary dependencies.
 3. Create a new database and update the .env file with your database credentials.
 4. Run `php artisan migrate` to run the database migrations.
-5. Run `php artisan serv` to start the local development server.
+5. Run `php artisan ser` to start the local development server.
 6. Visit http://localhost:8000 in your web browser to view the website.
 
 ## Usage
