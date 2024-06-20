@@ -9,4 +9,5 @@
 }
 
 .overlay {
+    background: linear-gradient(to bottom, #111212, #469550b0);
 }
